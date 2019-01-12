@@ -1,22 +1,15 @@
 extends Node2D
 
-export (String) var Action
-export (bool) var Chargeable
-export (float, 0.2) var ChargeTime
-export (float, 0.2) var ChargeEpsilon
-signal begin(action)
-signal cancel(action, charged_time)
-signal complete(action, charged_time)
+signal activated(action)
 
-var action_executed = false
-var current_charge_time = 0.0
+export (String) var InputAction
+
+var index
+
+func set_index(value):
+    index = value
 
 func _physics_process(delta):
-    if not action_executed and Input.is_action_pressed(Action):
-        if Chargeable:
-            current_charge_time += delta
-            if current_charge_time > ChargeTime:
-                emit_signal("cancel", self, current_charge_time)
-            
-        pass
-    pass
+    if Input.is_action_just_pressed(InputAction) and index == get_parent().get_current_index():
+        print("Action: " + InputAction)
+        emit_signal("activated", self)

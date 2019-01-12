@@ -5,8 +5,8 @@
 [ext_resource path="res://Art/waiter2.png" type="Texture" id=3]
 [ext_resource path="res://Art/baseball_bat.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/MoveController.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/Move2.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/Action2.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Move.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Action.gd" type="Script" id=7]
 [ext_resource path="res://Art/waiter1.png" type="Texture" id=8]
 
 [sub_resource type="ArrayMesh" id=1]
@@ -250,11 +250,10 @@ script = ExtResource( 5 )
 TimeToNextMoveVerification = 0.2
 
 [node name="SpinSwingLeft" type="Node2D" parent="Player/MoveController"]
-editor/display_folded = true
 script = ExtResource( 6 )
-MoveName = "SpinSwing"
+MoveName = "SpinSwingLeft"
 AnimationName = "SpinSwing"
-TimeSpan = 5.0
+TimeSpan = 6.0
 
 [node name="Action1" type="Node2D" parent="Player/MoveController/SpinSwingLeft"]
 script = ExtResource( 7 )
@@ -273,11 +272,10 @@ script = ExtResource( 7 )
 InputAction = "ui_swing"
 
 [node name="SpinSwingRight" type="Node2D" parent="Player/MoveController"]
-editor/display_folded = true
 script = ExtResource( 6 )
-MoveName = "SpinSwing"
+MoveName = "SpinSwingRight"
 AnimationName = "SpinSwing"
-TimeSpan = 5.0
+TimeSpan = 6.0
 
 [node name="Action1" type="Node2D" parent="Player/MoveController/SpinSwingRight"]
 script = ExtResource( 7 )
@@ -296,11 +294,10 @@ script = ExtResource( 7 )
 InputAction = "ui_swing"
 
 [node name="LowSwing" type="Node2D" parent="Player/MoveController"]
-editor/display_folded = true
 script = ExtResource( 6 )
 MoveName = "LowSwing"
 AnimationName = "LowSwing"
-TimeSpan = 5.0
+TimeSpan = 2.0
 
 [node name="Action1" type="Node2D" parent="Player/MoveController/LowSwing"]
 script = ExtResource( 7 )
@@ -314,9 +311,8 @@ InputAction = "ui_swing"
 script = ExtResource( 6 )
 MoveName = "Swing"
 AnimationName = "Swing"
-TimeSpan = 1.0
 
-[node name="Action2" type="Node2D" parent="Player/MoveController/Swing"]
+[node name="Action1" type="Node2D" parent="Player/MoveController/Swing"]
 script = ExtResource( 7 )
 InputAction = "ui_swing"
 
