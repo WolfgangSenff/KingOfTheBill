@@ -8,8 +8,11 @@ var moving_right = false
 func _ready():
     $MoveController.connect("execute_move", self, "on_move_executed")
     
-func on_move_executed(move):
-    $AnimationPlayer.play(move.AnimationName)
+func on_move_executed(move, use_tween):
+    if not use_tween:
+        $AnimationPlayer.play(move.AnimationName)
+    else:
+        move.handle_with_tween($Tween)
 
 func handle_left(delta):
     if moving_right:

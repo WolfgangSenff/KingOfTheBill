@@ -13,11 +13,11 @@ func _ready():
         child.connect("cancel", self, "on_move_canceled")
         all_moves.append(child)
 
-func on_try_move_execute(move):
+func on_try_move_execute(move, use_tween):
     current_possible_moves.append(move)
-    get_tree().create_timer(TimeToNextMoveVerification).connect("timeout", self, "on_move_executed", [move])
+    get_tree().create_timer(TimeToNextMoveVerification).connect("timeout", self, "on_move_executed", [move, use_tween])
 
-func on_move_executed(move):
+func on_move_executed(move, use_tween):
     var max_move_count = 0
     var max_move = null
     for move in current_possible_moves:
@@ -27,11 +27,11 @@ func on_move_executed(move):
             max_move = move
             
     if max_move != null:
-        execute(max_move)
+        execute(max_move, use_tween)
         reset_controller()
         
-func execute(move):
-    emit_signal("execute_move", move)
+func execute(move, use_tween):
+    emit_signal("execute_move", move, use_tween)
     pass
     
 func reset_controller():
@@ -42,41 +42,3 @@ func on_move_canceled(move):
     if pos != -1:
         current_possible_moves.remove(pos)
     pass
-    
-
-    
-
-    
-    
-    
-#    parse_all_moves()
-#
-#
-#func parse_all_moves():
-#    for move in get_children():
-#        for action in move.get_children():
-#            if not all_moves.has(move.MoveName):
-#                all_moves[move.MoveName] = {"move": move, "action_list": []}
-#                all_moves[move.MoveName]["total_move_time"] = 0
-#
-#            all_moves[move.MoveName]["action_list"].append({action.InputAction: action})
-#            all_moves[move.MoveName]["total_move_time"] += TimePerAction
-#
-#        all_moves[move.MoveName]
-#
-#    print("All moves:\n" + str(all_moves))
-#
-#var current_possible_moves = []
-#var current_time_to_next_action
-#var current_action_index = 0
-#var awaiting_next_action = false
-#
-#func _physics_process(delta):
-#    current_time_to_next_action += delta
-#
-#    for move in current_possible_moves:
-#        if Input.is_action_pressed(move["action_list"][current_action_index].InputAction):
-#
-#            pass
-#        pass
-#    pass

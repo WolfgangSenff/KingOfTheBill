@@ -1,11 +1,12 @@
 extends Node2D
 
-signal execute(move)
+signal execute(move, use_tween)
 signal cancel(move)
 
 export (String) var MoveName
 export (String) var AnimationName
 export (float, 0.2, 10) var TimeSpan
+export (bool) var UseTween
 
 var tracking_actions = false
 var all_actions = []
@@ -27,6 +28,9 @@ func _physics_process(delta):
             emit_signal("cancel", self)
             reset_move()
 
+func handle_with_tween(tween):
+    pass
+
 func get_current_index():
     return all_actions.size()
 
@@ -41,7 +45,7 @@ func on_action_activated(action):
         if all_actions.size() == get_child_count():
             var result = check_correctness()
             if result:
-                emit_signal("execute", self)
+                emit_signal("execute", self, UseTween)
             else:
                 emit_signal("cancel", self)
             reset_move()
